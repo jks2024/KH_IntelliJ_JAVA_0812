@@ -34,4 +34,6 @@ public class Character {
         System.out.printf("마법 공격력 : %.2f\n", mAttack());
     }
 
+
+
 }
