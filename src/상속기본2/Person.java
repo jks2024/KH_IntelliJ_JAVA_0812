@@ -22,7 +22,7 @@ class Worker extends Person {
     }
     void viewWorker() {
         System.out.println(work);
-        System.out.println(getEat());
+        System.out.println(this.getEat());
     }
 }
 class HouseWife extends Person {
