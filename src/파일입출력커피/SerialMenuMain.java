@@ -16,7 +16,7 @@ public class SerialMenuMain {
         map.put("Americano", new MenuInfo("Americano", 2000, "Coffee", "기본커피"));
         map.put("Espresso", new MenuInfo("Espresso", 2500, "Coffee", "진한커피"));
         map.put("Latte", new MenuInfo("Latte", 4000, "Coffee", "우유 포함"));
-        FileOutputStream fos = new FileOutputStream("C:/파일입출력tmp/커피메뉴.txt");
+        FileOutputStream fos = new FileOutputStream("/Users/kyungsoojeong/tmp/커피메뉴.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(map); // 객체 출력 스트림을 이용해서 list 출력
         oos.flush();

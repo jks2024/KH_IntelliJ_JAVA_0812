@@ -15,6 +15,8 @@ public class MenuInfo implements Serializable {
         this.desc = desc;
     }
 
+    private static final long serialVersionUID = -6423919775137290062L;
+
     public String getName() {
         return name;
     }
