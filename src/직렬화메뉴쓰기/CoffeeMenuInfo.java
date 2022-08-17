@@ -1,21 +1,19 @@
-package 파일입출력커피;
-
+package 직렬화메뉴쓰기;
 import java.io.Serializable;
+// 직렬화할 클래스
+// transient 키워드를 사용하면 직렬화에서 제외 된다.
+public class CoffeeMenuInfo implements Serializable {
+    private String name; // 메뉴 이름
+    private int price;   // 가격
+    private String group; // 분류
+    private String desc;  // 설명
 
-public class MenuInfo implements Serializable {
-    private String name;
-    private int price;
-    private String group;
-    private String desc;
-
-    public MenuInfo(String name, int price, String group, String desc) {
+    public CoffeeMenuInfo(String name, int price, String group, String desc) {
         this.name = name;
         this.price = price;
         this.group = group;
         this.desc = desc;
     }
-
-    private static final long serialVersionUID = -6423919775137290062L;
 
     public String getName() {
         return name;
