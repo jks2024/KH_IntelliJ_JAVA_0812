@@ -1,5 +1,7 @@
 package 자바종합실습2번Client;
 import 자바종합실습2번.NameCardInfo;
+
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -23,7 +25,7 @@ public class NameClientTh extends Thread {
 
     @Override
     public void run() {
-        InputStream input;
+        InputStream input = null;
         ObjectInputStream ois;
         List<NameCardInfo> nameCards;
         try {
@@ -33,11 +35,17 @@ public class NameClientTh extends Thread {
                 nameCards = (List<NameCardInfo>) ois.readObject();
                 viewNameCards(nameCards);
             }
-        } catch(IOException e) {} catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (EOFException e) {
+            System.out.println("<< 명함 수신이 완료 되었습니다. 작업을 종료 합니다. >>");
+            if(input != null) {
+                try {
+                    input.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        } catch(IOException | ClassNotFoundException e) {
+            System.out.println(e);
         }
-
     }
-
-
 }

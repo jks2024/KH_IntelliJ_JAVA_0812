@@ -11,13 +11,12 @@ public class ImageServerTh extends Thread {
         this.socket = socket;
         this.fileName = fileName;
         sockets.add(socket);
-        System.out.println("이미지 서버 생성자 호출 : " + fileName);
     }
 
     @Override
     public void run() {
         int len;
-        byte[] buffer = new byte[100];
+        byte[] buffer = new byte[1024];
         try {
             for(int i = 0; i < sockets.size(); i++) {
                 FileInputStream fis = new FileInputStream(fileName);

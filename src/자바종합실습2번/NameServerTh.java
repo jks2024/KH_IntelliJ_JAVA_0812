@@ -21,7 +21,8 @@ public class NameServerTh extends Thread {
                 oos.writeObject(NameCardServer.writeNameCard());
                 oos.flush();
                 oos.close();
-                System.out.println(sockets.get(i).getRemoteSocketAddress() + "에게 전송 완료.");
+                System.out.println(sockets.get(i).getRemoteSocketAddress().toString() + "에게 전송 완료.");
+                out.close();
             }
         } catch(IOException e) { }
 
