@@ -1,7 +1,5 @@
 package 람다메소드참조3;
-import java.util.function.BiFunction;
 import java.util.function.DoubleUnaryOperator;
-import java.util.function.Function;
 // 메소드 참조에는 생성자 참조를 포함 합니다.
 // 메소드 참조 : 클래스 필드, 인스턴스 필드, 매개변수참조, 생성자참조
 public class LambdaMethodEx3 {
