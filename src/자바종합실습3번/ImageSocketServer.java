@@ -22,7 +22,7 @@ public class ImageSocketServer {
             serverSocket = new ServerSocket(port);
             while(true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("[클라이언트 : " + socket.getRemoteSocketAddress() + "연결");
+                System.out.print("[클라이언트 : " + socket.getRemoteSocketAddress() + "연결 되었습니다.");
                 Thread server = new ImageServerTh(socket, path);
                 server.start();
 

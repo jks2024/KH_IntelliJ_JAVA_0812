@@ -4,16 +4,17 @@ import java.net.Socket;
 
 public class ImageClientTh extends Thread {
     Socket socket;
-    public ImageClientTh(Socket socket) {
+    String path;
+    public ImageClientTh(Socket socket, String path) {
         this.socket = socket;
+        this.path = path;
     }
 
     @Override
     public void run() {
         try {
             InputStream input = socket.getInputStream();
-            String testName = "src/자바종합실습3번Client/bear.jpg";
-            FileOutputStream fos = new FileOutputStream(testName);
+            FileOutputStream fos = new FileOutputStream(path);
             int len;
             byte[] buffer = new byte[1024];
             while((len = input.read(buffer)) != -1) {
