@@ -1,5 +1,5 @@
 package 자바종합실습2번Client;
-import 자바종합실습2번.NameCardInfo;
+import 자바종합실습2번.NameCardS;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -13,8 +13,8 @@ public class NameClientTh extends Thread {
     public NameClientTh(Socket socket) {
         this.socket = socket;
     }
-    void viewNameCards(List<NameCardInfo> nameCards) {
-        for(NameCardInfo e : nameCards) {
+    void viewNameCard(List<NameCardS> nameCardS) {
+        for(NameCardS e : nameCardS) {
             System.out.println("====== 명함 정보 출력 ======");
             System.out.println("이름 : " + e.getName());
             System.out.println("회사 : " + e.getCompany());
@@ -22,30 +22,31 @@ public class NameClientTh extends Thread {
             System.out.println("이메일 : " + e.getEmail());
         }
     }
-
     @Override
     public void run() {
-        InputStream input = null;
-        ObjectInputStream ois;
-        List<NameCardInfo> nameCards;
+        InputStream is = null;
+        ObjectInputStream ois; // 역직렬화
+        List<NameCardS> nameCardS;
         try {
-            while(true) {
-                input = socket.getInputStream();
-                ois = new ObjectInputStream(input);
-                nameCards = (List<NameCardInfo>) ois.readObject();
-                viewNameCards(nameCards);
-            }
-        } catch (EOFException e) {
-            System.out.println("<< 명함 수신이 완료 되었습니다. 작업을 종료 합니다. >>");
-            if(input != null) {
+            //while(true) {
+                is = socket.getInputStream();
+                ois = new ObjectInputStream(is);
+                nameCardS = (List<NameCardS>) ois.readObject();
+                viewNameCard(nameCardS);
+            //}
+        } catch(EOFException e) {
+            System.out.println("<< 명함 수신이 완료 되었습니다. 작업을 종료 합니다.");
+            if(is != null) {
                 try {
-                    input.close();
+                    is.close();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    System.out.println(ex);
                 }
             }
-        } catch(IOException | ClassNotFoundException e) {
+        } catch(IOException e) {
             System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

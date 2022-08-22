@@ -6,18 +6,22 @@ import java.util.TreeSet;
 
 public class TextFileRead {
     public static void main(String[] args) {
-        FileInputStream inputStream = null;
+        FileInputStream fis = null; // 가리키고 있는 주소가 없다
+        // TreeSet은 이진트리로 트리 생성시 자동 정렬 특성을 가짐 (Comparable 기준으로)
         TreeSet<StudentInfo> treeSet = new TreeSet<>();
         try {
-            inputStream = new FileInputStream("src/자바종합실습1번/score.txt");
-        } catch(FileNotFoundException e) {}
-        Scanner sc = new Scanner(inputStream);
-
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
+            // FileInputStream은 InputStream의 자식이며 바이트로 파일에서 데이터를 읽음
+            fis = new FileInputStream("src/자바종합실습1번/score.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+        // 스캐너릐 입력은 콘솔 이외에 파일로 부터도 읽어 들일 수 있음
+        Scanner sc = new Scanner(fis);
+        while(sc.hasNextLine()) { // 읽을 들일 다음 라인이 있는지 검사
+            String line = sc.nextLine(); // 개행문자(엔터키) 기준으로 읽어 들임
             String[] strArr = line.split(" ");
             treeSet.add(new StudentInfo(strArr[0],
-                    Integer.parseInt(strArr[1]),
+                    Integer.parseInt(strArr[1]), // 문자열을 정수로 변환
                     Integer.parseInt(strArr[2]),
                     Integer.parseInt(strArr[3])));
         }
